@@ -39,11 +39,11 @@ $ helm install charts/simple-app-0.1.0.tgz
 
 The following tables lists the configurable parameters of the Spark chart and their default values.
 
-### Croc-hunter
+### Simple-app
 
 |       Parameter       |           Description            |                         Default                          |
 |-----------------------|----------------------------------|----------------------------------------------------------|
-| `Name`            | app name                         | `croc-hunter`                                                |
+| `Name`            | app name                         | `simple-app`                                                |
 | `Image`           | Container image name             | `archyufa/webk8sbirthday`                               |
 | `ImageTag`        | Container image tag              | ` 1.0.1`                                                     |
 | `ImagePullPolicy` | Container pull policy            | `Always`                                                     |
