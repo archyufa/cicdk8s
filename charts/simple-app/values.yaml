@@ -5,7 +5,7 @@ replicaCount: 3
 image:
   repository: archyufa/webk8sbirthday
   tag: 1.0.1
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 service:
   name: simple-app
   type: NodePort

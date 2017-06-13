@@ -22,72 +22,44 @@ docker build -t archyufa/webk8sbirthday:1.0.4 .
 docker push archyufa/webk8sbirthday:1.0.4
 ```
 
-2. Show configs with 3 replicas.
+2. Create Deployment and Service:
 
- `cat kdemo/kdemo-dep.yaml`
+`kubectl create -f kdemo/`
 
-3. Create Deployment:
 
- *Option 1:*
+## Installing with Helm Chart
 
- `kubectl run kdemo --image=archyufa/webk8sbirthday:1.0.3 --port=8080`
+To install the chart with the release name `my-release`:
 
- *Option 2:*
-
- `kubectl create -f kdemo/kdemo-dep.yaml`
-
-4. Check pods:
-
- `kubectl get pods`
-
-5. Create and than expose a Service:
-
- *Option 1:*
-
- `kubectl expose deployment/kdemo --type=NodePort`
-
- *Option 2:*
-
- `kubectl create -f kdemo/kdemo-svc.yaml`
-
-6. Find Expose Endpoint:
-
-```
-minikube ip
-kubectl get svc kdemo -o wide
-kubectl describe svc/kdemo
+```bash
+$ helm install charts/simple-app-0.1.0.tgz
 ```
 
-## Demo of Replication Controllers and reconciliation loop
+## Configuration
 
-1. Open second screen and run:
-`while :; do clear; k get pod; sleep 2; done`
+The following tables lists the configurable parameters of the Spark chart and their default values.
 
-2. Let's kill 1 container. So that we will have 2 containers out of 3.
+### Simple-app
 
+|       Parameter       |           Description            |                         Default                          |
+|-----------------------|----------------------------------|----------------------------------------------------------|
+| `Name`            | app name                         | `simple-app`                                                |
+| `Image`           | Container image name             | `archyufa/webk8sbirthday`                               |
+| `ImageTag`        | Container image tag              | ` 1.0.1`                                                     |
+| `ImagePullPolicy` | Container pull policy            | `Always`                                                     |
+| `Replicas`        | k8s deployment replicas          | `3`                                                          |
+| `Cpu`             | container requested cpu          | `10m`                                                        |
+| `Memory`          | container requested memory       | `128Mi`                                                      |
+| `ServiceType`     | k8s service type                 | `NodePort`                                               |
+| `ServicePort`     | k8s service port                 | `80`                                                         |
+| `ContainerPort`   | Container listening port         | `8080`                                                       |
+
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
+
+Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
+
+```bash
+$ helm install --name my-release -f values.yaml charts/simple-app-0.1.0.tgz
 ```
-kubectl get pods
-kubectl delete pod
-```
 
-## Demo Scaling pods
-
-```
-kubectl scale deployment/kdemo --replicas=6
-kubectl scale deployment/kdemo --replicas=9
-kubectl scale deployment/kdemo --replicas=5
-```
-
-## Demo Rolling Update of app
-
-`kubectl edit deployment/kdemo`
-
-Change to (image: archyufa/webk8sbirthday:1.0.4)
-
-## Rollback
-
-```
-kubectl edit deployment/kdemo
-kubectl rollout
-kubectl rollout undo deployment/kdemo
-```
+> **Tip**: You can use the default [values.yaml](values.yaml)
