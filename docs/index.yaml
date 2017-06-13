@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  simple-app:
+  - apiVersion: v1
+    created: 2017-06-13T19:19:16.247383786-04:00
+    description: A Helm chart for Kubernetes
+    digest: 95928c331bcf01840930db5b7edb85aa4405e69ee160d823aea1450c33e614bf
+    name: simple-app
+    urls:
+    - https://github.com/archyufa/cicdk8s/simple-app-0.1.0.tgz
+    version: 0.1.0
+generated: 2017-06-13T19:19:16.246769529-04:00
