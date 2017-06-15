@@ -1,5 +1,5 @@
 #!/usr/bin/groovy
-node ('Jenkinsfile pipe') {
+node ('docker') {
     stage ('Building Image'){
         // run docker build job and push, make sure the directory is empty for
         // build
